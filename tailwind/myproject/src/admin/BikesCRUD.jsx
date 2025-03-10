@@ -20,7 +20,7 @@ const AdminBikes = () => {
 
   const fetchBikes = async () => {
     try {
-      const id = "HONDA"; /*aba bajaj ko garne*/
+      const id = "Yamaha"; /*aba bajaj ko garne*/
       const response = await axios.get(`http://localhost:5500/admin/all/${id}`);
       setBikes(response.data);
     } catch (error) {

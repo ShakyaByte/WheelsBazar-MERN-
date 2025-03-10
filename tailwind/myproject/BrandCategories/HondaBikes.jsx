@@ -23,8 +23,8 @@ const HondaBikes = () => {
   };
 
   return (
-    <div className="mt-7 mb-7" >
-    <h2 className="text-2xl font-semibold mb-4 place-self-center lg:mb-8">HONDA BIKES </h2>
+    <div className="mt-25 mb-7" >
+    <h2 className="text-2xl font-semibold mb-1 place-self-center lg:mb-8">HONDA BIKES </h2>
     <div 
     className="grid grid-cols-1 md:grid-cols-2 justify-center ml-10 mr-10 gap-6 
               xl:grid-cols-3 

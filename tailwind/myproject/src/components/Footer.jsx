@@ -7,8 +7,10 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
           <div>
-            <h3 className="text-xl font-bold mb-4">BikeWale Clone</h3>
-            <p className="text-gray-400">Your one-stop destination for bikes.</p>
+            <h3 className="text-xl font-bold mb-4">Wheels Bazar</h3>
+            <p className="text-gray-400"> WheelsBazar is your go-to marketplace for buying and selling vehicles with ease. List your products effortlessly, connect with potential buyers, and explore a variety of listings—all in one place. Start your journey with WheelsBazar today! 
+            </p>
+
           </div>
           <div>
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>

@@ -23,8 +23,8 @@ const KTMBikes = () => {
   };
 
   return (
-    <div className="mt-7 mb-7" >
-      <h2 className="text-2xl font-semibold mb-8 place-self-center"> KTM Bikes</h2>
+    <div className="mt-25 mb-7" >
+      <h2 className="text-2xl font-semibold mb-1 place-self-center lg:mb-7"> KTM BIKES</h2>
       <div className
       ="grid grid-cols-1 md:grid-cols-2 justify-center ml-10 mr-10 gap-6 
                 xl:grid-cols-3 
