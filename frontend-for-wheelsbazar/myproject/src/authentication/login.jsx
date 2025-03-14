@@ -38,13 +38,13 @@ try {
   const token = response.data.token;
   const userData = {
     email: response.data.email || formData.email,
-    name: response.data.name || "User",
+    name: response.data.name, /*getting useranme from backend res*/
   };
 
   // Call login from context to update state and localStorage
   login(token, userData);
 
-  // Log before storing
+  // Display userdata before storing
   console.log("Storing token:", token);
   console.log("Storing userData:", userData);
 

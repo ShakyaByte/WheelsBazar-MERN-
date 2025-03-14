@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom"; /*uselocation used to not display the post i /post*/
 import { AuthContext } from "./AuthContext";
 
 const Navbar = ({ scrollToFeatured, scrollToUsedBikes }) => {
@@ -27,24 +27,29 @@ const Navbar = ({ scrollToFeatured, scrollToUsedBikes }) => {
                 to="/post"
                 className="text-white text-md bg-black p-2 rounded-[7px]"
               >
-                Post For Free
+                Post For Free {/*not showing this content on /post page*/}
               </Link>
             )}
+
             <Link to="/" className="text-gray-700 hover:text-blue-600">
               Home
             </Link>
+
+            {/*Scrolling function to brands*/}
             <button
-              onClick={scrollToFeatured || (() => {})}
-              className="text-gray-700 hover:text-blue-600 cursor-pointer"
-            >
+              onClick={scrollToFeatured}
+              className="text-gray-700 hover:text-blue-600 cursor-pointer">
               Brands
             </button>
+
+            {/*Scrolling function to usedbikes*/}
             <button
-              onClick={scrollToUsedBikes || (() => {})}
-              className="text-gray-700 hover:text-blue-600 cursor-pointer"
-            >
+              onClick={scrollToUsedBikes}
+              className="text-gray-700 hover:text-blue-600 cursor-pointer">
               Used-Bikes
             </button>
+
+
             {isLoggedIn ? (
               <div className="relative">
                 <button
@@ -54,13 +59,14 @@ const Navbar = ({ scrollToFeatured, scrollToUsedBikes }) => {
                   <span className="text-2xl cursor-pointer">👤</span>
                 </button>
                 {showDropdown && (
-                  <div className="absolute right-0 mt-5 w-65 bg-white shadow-lg rounded-lg p-4 z-50">
+                  <div className="fixed top-17 right-1 w-80 bg-white shadow-lg rounded-lg p-4 z-50">
                     <p className="text-gray-700">
                       <strong>Name:</strong> {user?.name || "N/A"}
                     </p>
                     <p className="text-gray-700">
                       <strong>Email:</strong> {user?.email || "N/A"}
                     </p>
+                    <Link to="/userprofile"> <p className="text-green-400 cursor-pointer"> Link to Profile</p> </Link>
                     <button
                       onClick={handleLogout}
                       className="w-18 text-left text-white bg-red-500 hover:bg-red-600 mt-2 p-2 rounded-md cursor-pointer"

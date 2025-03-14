@@ -13,10 +13,13 @@ import YamahaBikes from '../BrandCategories/YamahaBikes';
 import KTMBikes from '../BrandCategories/KTMbikes';
 import BajajBikes from '../BrandCategories/BajajBikes';
 import HondaBikes from '../BrandCategories/HondaBikes';
+
+/*Register and LoginPage with context api for generating tokens*/
 import RegisterPage from './authentication/register';
 import LoginPage from './authentication/login';
 import ProductForm from '../pages/UserDashboard';
 import { AuthProvider } from './components/AuthContext';
+import UserProfile from '../pages/UserProfile';
 
 
 function AppContent() {
@@ -27,6 +30,7 @@ function AppContent() {
   const featuredRef = useRef(null);
   const UsedBikesRef = useRef(null);
 
+  /*moves to the provided content*/
   const scrollToFeatured = () => {
     if (featuredRef.current) {
       featuredRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -64,6 +68,7 @@ function AppContent() {
             {/* Till here */}
 
             <Route path="/post" element={<ProductForm/>} />
+            <Route path="/userprofile" element={<UserProfile/>} />
             
 
         </Routes>

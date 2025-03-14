@@ -45,7 +45,12 @@ router.post('/login', async (req, res) => {
     }
 
     const token = generateToken(user);
-    res.status(200).json({ message: "Login successful", token });
+    // ✅ Send back the user's name along with the token
+    res.status(200).json({
+      message: "Login successful",
+      token,
+      name: user.name, // displaying the username in response while login*/
+    });
 
   } catch (error) {
     res.status(500).json({ message: "Server error" });
