@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { AuthContext } from "../src/components/AuthContext"; // Adjust the import path as needed
 import axios from "axios";
 
@@ -17,7 +16,7 @@ const UserProfile = () => {
     images: "",
     condition: "",
     year: "",
-    owners: "", // Added missing fields from schema
+    owners: "", 
     location: "",
     contact: "",
   });

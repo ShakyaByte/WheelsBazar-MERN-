@@ -20,7 +20,7 @@ import LoginPage from './authentication/login';
 import ProductForm from '../pages/UserDashboard';
 import { AuthProvider } from './components/AuthContext';
 import UserProfile from '../pages/UserProfile';
-
+import Dashboard from './components/dashboard';
 
 function AppContent() {
   const location = useLocation();
@@ -69,12 +69,13 @@ function AppContent() {
 
             <Route path="/post" element={<ProductForm/>} />
             <Route path="/userprofile" element={<UserProfile/>} />
+            <Route path="/dashboard" element={<Dashboard/>} />
             
 
         </Routes>
       </main>
 
-      {!isAdminPage && <Footer />}
+      {!isAdminPage && <Footer scrollToFeatured={scrollToFeatured} scrollToUsedBikes={scrollToUsedBikes} />}
     </div>
   );
 }

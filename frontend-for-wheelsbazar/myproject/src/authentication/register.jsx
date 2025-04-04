@@ -43,6 +43,10 @@ const RegisterPage = () => {
     }
   };
 
+  const handleGoogleSignIn = () => {
+    window.location.href = "http://localhost:5500/auth/google";
+  };
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="bg-white shadow-lg rounded-lg p-6 w-96">
@@ -96,6 +100,13 @@ const RegisterPage = () => {
             {loading ? "Signing Up..." : "Sign Up"}
           </button>
         </form>
+
+        <button
+          onClick={handleGoogleSignIn}
+          className="w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition mt-4"
+        >
+          Sign in with Google
+        </button>
 
         <p className="mt-3 text-center text-gray-600">
           Already have an account? {" "}

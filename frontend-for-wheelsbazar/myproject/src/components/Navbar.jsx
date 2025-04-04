@@ -66,7 +66,7 @@ const Navbar = ({ scrollToFeatured, scrollToUsedBikes }) => {
                     <p className="text-gray-700">
                       <strong>Email:</strong> {user?.email || "N/A"}
                     </p>
-                    <Link to="/userprofile"> <p className="text-green-400 cursor-pointer"> Link to Profile</p> </Link>
+                    <Link to="/userprofile"> <p className="text-green-400 cursor-pointer"> Visit Profile</p> </Link>
                     <button
                       onClick={handleLogout}
                       className="w-18 text-left text-white bg-red-500 hover:bg-red-600 mt-2 p-2 rounded-md cursor-pointer"
