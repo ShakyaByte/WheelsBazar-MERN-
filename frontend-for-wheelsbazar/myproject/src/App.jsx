@@ -1,12 +1,9 @@
 import React, {useRef} from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
-/*import BikeCategories from './components/BikeCategories';
-import FeaturedBikes from './components/FeaturedBikes';*/
 import Footer from './components/Footer';
 import HomePage from '../pages/Homepage';
 import BikesPage from '../pages/Bikepage'; 
-import ComparePage from '../pages/ComparePage';
 import AdminPage from '../src/admin/AdminPage';
 /*import Bikes from './admin/Bikes';*/
 import YamahaBikes from '../BrandCategories/YamahaBikes';
@@ -52,7 +49,6 @@ function AppContent() {
         <Routes>
           <Route path="/" element={<HomePage featuredRef={featuredRef} UsedBikesRef={UsedBikesRef}/>}/>
           <Route path="/brands" element={<BikesPage />} />
-          <Route path="/compare" element={<ComparePage />} />
             <Route path="/admin" element={<AdminPage />} />
 
             {/*brands path*/}
