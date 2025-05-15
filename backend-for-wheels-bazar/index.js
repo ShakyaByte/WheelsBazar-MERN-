@@ -19,6 +19,7 @@ app.use(express.json());
 
 // Import Routes
 app.use('/admin', require('./controllers/admin-products')); //admin control
+app.use('/admin/categories', require('./controllers/admin-categories')); //admin control
 app.use('/admin', require('./AdminRoutes/Adminauth')); //admin auth
 app.use('/user', require('./Routes/UserAuth'));
 app.use('/product', require('./Routes/ProductRoutes'));

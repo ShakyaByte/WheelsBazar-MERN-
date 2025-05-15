@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import HomePage from '../pages/Homepage';
 import BikesPage from '../pages/Bikepage'; 
 import AdminPage from '../src/admin/AdminPage';
+
 /*import Bikes from './admin/Bikes';*/
 import YamahaBikes from '../BrandCategories/YamahaBikes';
 import KTMBikes from '../BrandCategories/KTMbikes';
@@ -17,7 +18,12 @@ import LoginPage from './authentication/login';
 import ProductForm from '../pages/UserDashboard';
 import { AuthProvider } from './components/AuthContext';
 import UserProfile from '../pages/UserProfile';
-import Dashboard from './components/dashboard';
+
+/*new categories*/
+import Helmets from '../DifferntCategories/Helmets';
+import RidingGears from '../DifferntCategories/RidingGears';
+import Accessories from '../DifferntCategories/Accesories';
+import Mods from '../DifferntCategories/mods';
 
 function AppContent() {
   const location = useLocation();
@@ -58,6 +64,14 @@ function AppContent() {
             <Route path="/honda" element={<HondaBikes/>} />
             {/*brands path till here*/}
 
+             {/*diiferent categories path*/}
+             <Route path="/helmets" element={<Helmets />} />
+             <Route path="/ridinggears" element={<RidingGears />} />
+             <Route path="/accessories" element={<Accessories />} />
+              <Route path="/mods" element={<Mods />} />
+            {/*diiferent categories till here*/}
+
+
             {/*for authentication*/}
             <Route path="/register" element={<RegisterPage/>} />
             <Route path="/login" element={<LoginPage/>} />
@@ -65,7 +79,7 @@ function AppContent() {
 
             <Route path="/post" element={<ProductForm/>} />
             <Route path="/userprofile" element={<UserProfile/>} />
-            <Route path="/dashboard" element={<Dashboard/>} />
+            {/*<Route path="/dashboard" element={<Dashboard/>} />*/}
             
 
         </Routes>

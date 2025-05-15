@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FaTachometerAlt, FaUsers, FaMotorcycle, FaCog, FaSignOutAlt } from "react-icons/fa";
 import Bikes from "./BikesCRUD"; // Import the Bikes component
+import NewCategories from "./AllProductsCRUD"
 
 const AdminPanel = () => {
   const [activeTab, setActiveTab] = useState("Dashboard");
@@ -13,7 +14,7 @@ const AdminPanel = () => {
         <div className="flex space-x-6">
           {[
             { name: "Dashboard", icon: FaTachometerAlt },
-            { name: "Users", icon: FaUsers },
+            { name: "Products", icon: FaUsers },
             { name: "Bikes", icon: FaMotorcycle },
             { name: "Settings", icon: FaCog },
           ].map((tab) => (
@@ -54,6 +55,7 @@ const AdminPanel = () => {
           )}
 
           {activeTab === "Bikes" && <Bikes />}
+          {activeTab === "Products" && <NewCategories />}
         </section>
       </main>
     </div>
