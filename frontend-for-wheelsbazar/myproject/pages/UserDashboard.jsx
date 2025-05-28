@@ -1,18 +1,21 @@
 import React, { useState } from "react";
 import axios from "axios";
+//gears & maintainance arent working
 const UserDashboard = () => {
   const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    price: "",
-    images: "",
-    condition: "",
-    year: "",
-    location: "",
-    owners: "",
-    contact: "",
-  });
+ const [formData, setFormData] = useState({
+  title: "",
+  description: "",
+  price: "",
+  images: "",
+  condition: "",
+  year: "",
+  location: "",
+  owners: "",
+  contact: "",
+  category: "", // <-- New field
+});
+
 
   //Handeling Error message for empty input fields
   const [error, setError] = useState({
@@ -25,6 +28,7 @@ const UserDashboard = () => {
     location: "",
     owners: "",
     contact: "",
+    category: "",
   });
 
 
@@ -41,45 +45,35 @@ const UserDashboard = () => {
     }
 
 
-    if (step === 2) {
-      if (!formData.title) {
-        newErrors.title = "Title is required.";
-        isValid = false;
-      }
-      if (!formData.description) {
-        newErrors.description = "Description is required.";
-        isValid = false;
-      }
+  if (step === 2) {
+  if (!formData.title.trim()) {
+    newErrors.title = "Title is required.";
+    isValid = false;
+  }
+  if (!formData.description.trim()) {
+    newErrors.description = "Description is required.";
+    isValid = false;
+  }
+  if (!formData.year.trim()) {
+    newErrors.year = "Manufacturing year is required.";
+    isValid = false;
+  }
+  if (!formData.category.trim()) {
+    newErrors.category = "Category is required.";
+    isValid = false;
+  }
+  if (!formData.location.trim()) {
+    newErrors.location = "Location is required.";
+    isValid = false;
+  }
+  if (!formData.contact.trim()) {
+    newErrors.contact = "Phone no is required.";
+    isValid = false;
+  }
 
-      if (!formData.year) {
-        newErrors.year = "Manufacturing year is required.";
-        isValid = false;
-      }
 
-      if (!formData.condition) {
-        newErrors.condition = "Condition is required.";
-        isValid = false;
-      }
+}
 
-      
-      if (!formData.location) {
-        newErrors.location = "Location is required.";
-        isValid = false;
-      }
-
-      
-      if (!formData.owners) {
-        newErrors.owners = "No of Owners is required.";
-        isValid = false;
-      }
-
-      
-      if (!formData.contact) {
-        newErrors.contact = "Phone no is required.";
-        isValid = false;
-      }
-
-    }
 
 
     if (step === 3) {
@@ -125,10 +119,11 @@ const handleSubmit = async (e) => {
     e.preventDefault();
   if (!validateStep()) return;
 
-  const submissionData = {
-    ...formData,
-    images: [formData.images],
-  };
+const submissionData = {
+  ...formData,
+  images: [formData.images.trim()], // ensure it's valid and not empty
+};
+
 
   try {
     await axios.post(
@@ -149,6 +144,7 @@ const handleSubmit = async (e) => {
       location: "",
       owners: "",
       contact: "",
+      category: "",
     });
     setPostError(""); // Clear previous error
     setStep(4);
@@ -181,95 +177,125 @@ const handleSubmit = async (e) => {
             </button>
           </div>
         );
-      case 2:
-        return (
-          <div className="p-6">
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">Step 2: Add Details</h2>
+
+     case 2:
+  return (
+    <div className="p-6">
+      <h2 className="text-2xl font-bold text-gray-800 mb-4">Step 2: Add Details</h2>
+
+      {/* Category Selection */}
+      <select
+        name="category"
+        value={formData.category}
+        onChange={handleChange}
+        className="w-full p-3 mb-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 
+        focus:ring-blue-500">
+        <option value="">Select Category</option>
+        <option value="vehicle">Vehicle</option>
+        <option value="gears">Gears </option>
+        <option value="Bikeparts">Bike Parts</option>
+        <option value="Modifications">Modifications </option>
+        <option value="maintenance">Maintenance & Tools </option>
+        {/* Add more categories as needed */}
+      </select>
+      {error.category && <p className="text-red-500 text-sm mb-3">{error.category}</p>}
+
+      <input
+        type="text"
+        name="title"
+        placeholder="Title"
+        value={formData.title || ""}
+        onChange={handleChange}
+        className="w-full p-3 mb-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      {error.title && <p className="text-red-500 text-sm mb-3">{error.title}</p>}
+
+      <textarea
+        name="description"
+        placeholder="Description"
+        value={formData.description || ""}
+        onChange={handleChange}
+        className="w-full p-3 mb-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      {error.description && <p className="text-red-500 text-sm mb-3">{error.description}</p>}
+
+      <input
+        type="number"
+        name="year"
+        placeholder="Manufacturing Year"
+        value={formData.year || ""}
+        onChange={handleChange}
+        className="w-full p-3 mb-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      {error.year && <p className="text-red-500 text-sm mb-3">{error.year}</p>}
+
+      {/* Conditional Fields for "vehicle" */}
+      {formData.category === "vehicle" && (
+          <>
+            <select
+              name="condition"
+              value={formData.condition || ""}
+              onChange={handleChange}
+              className="w-full p-3 mb-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="" disabled>
+                Select Condition
+              </option>
+              <option value="New">New</option>
+              <option value="Likenew">Like New</option>
+              <option value="Used">Used</option>
+            </select>
+            {error.condition && <p className="text-red-500 text-sm mb-3">{error.condition}</p>}
+
             <input
-              type="text"
-              name="title"
-              placeholder="Title"
-              value={formData.title || ""}
-              onChange={handleChange}
-              className="w-full p-3 mb-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
-              {error.title && <p className="text-red-500 text-sm mb-3">{error.title}</p>}
-
-
-            <textarea
-              name="description"
-              placeholder="Description"
-              value={formData.description || ""}
-              onChange={handleChange}
-              className="w-full p-3 mb-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
-             {error.description && <p className="text-red-500 text-sm mb-3">{error.description}</p>}
-
-
-             <input
-              type="number"
-              name="year"
-              placeholder="Manufacturing Year"
-              value={formData.year || ""}
-              onChange={handleChange}
-              className="w-full p-3 mb-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
-              {error.year && <p className="text-red-500 text-sm mb-3">{error.year}</p>}
-
-              <select
-                  name="condition"
-                  value={formData.condition || ""}
-                  onChange={handleChange}
-                  className="w-full p-3 mb-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  <option value="" disabled>Select Condition</option>
-                  <option value="New">New</option>
-                  <option value="Likenew">Like New</option>
-                  <option value="Used">Used</option>
-              </select>
-                {error.condition && <p className="text-red-500 text-sm mb-3">{error.condition}</p>}
-
-                <input
-              type="text"
-              name="location"
-              placeholder="Enter Your Location"
-              value={formData.location || ""}
-              onChange={handleChange}
-              className="w-full p-3 mb-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
-              {error.location && <p className="text-red-500 text-sm mb-3">{error.location}</p>}
-
-              <input
               type="number"
               name="owners"
               placeholder="No of Recent Owners"
               value={formData.owners || ""}
               onChange={handleChange}
-              className="w-full p-3 mb-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
-              {error.owners && <p className="text-red-500 text-sm mb-3">{error.owners}</p>}
+              className="w-full p-3 mb-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            {error.owners && <p className="text-red-500 text-sm mb-3">{error.owners}</p>}
+          </>
+  )}
 
-              <input
-              type="number"
-              name="contact"
-              placeholder="Enter Your Phone No"
-              value={formData.contact || ""}
-              onChange={handleChange}
-              className="w-full p-3 mb-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
-              {error.contact && <p className="text-red-500 text-sm mb-3">{error.contact}</p>}
+      <input
+        type="text"
+        name="location"
+        placeholder="Enter Your Location"
+        value={formData.location || ""}
+        onChange={handleChange}
+        className="w-full p-3 mb-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      {error.location && <p className="text-red-500 text-sm mb-3">{error.location}</p>}
 
+      <input
+        type="number"
+        name="contact"
+        placeholder="Enter Your Phone No"
+        value={formData.contact || ""}
+        onChange={handleChange}
+        className="w-full p-3 mb-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      {error.contact && <p className="text-red-500 text-sm mb-3">{error.contact}</p>}
 
-            <div className="flex justify-between">
-              <button
-                onClick={prevStep}
-                className="bg-gray-300 text-gray-800 py-3 px-6 rounded-lg hover:bg-gray-400 transition duration-200 cursor-pointer"
-              >
-                Back
-              </button>
-              <button
-                onClick={nextStep}
-                className="bg-gray-700 text-white py-3 px-6 rounded-lg hover:bg-gray-800 transition duration-200 cursor-pointer"
-              >
-                Next
-              </button>
-            </div>
-          </div>
-        );
+      <div className="flex justify-between">
+        <button
+          onClick={prevStep}
+          className="bg-gray-300 text-gray-800 py-3 px-6 rounded-lg hover:bg-gray-400 transition duration-200 cursor-pointer"
+        >
+          Back
+        </button>
+        <button
+          onClick={nextStep}
+          className="bg-gray-700 text-white py-3 px-6 rounded-lg hover:bg-gray-800 transition duration-200 cursor-pointer"
+        >
+          Next
+        </button>
+      </div>
+    </div>
+  );
+
       case 3:
         return (
           <div className="p-6">
@@ -360,4 +386,4 @@ const handleSubmit = async (e) => {
 };
 
 
-export default UserDashboard;
+export default UserDashboard;  

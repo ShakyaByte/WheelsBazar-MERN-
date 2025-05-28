@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Product = require('../Models/categories'); // Renamed to avoid conflict
 
-// Create a product
+// Create a product categories similar whats done in for the bike
 router.post('/add', async (req, res) => {
     try {
         const { productid, name, price, image, description, category } = req.body;
